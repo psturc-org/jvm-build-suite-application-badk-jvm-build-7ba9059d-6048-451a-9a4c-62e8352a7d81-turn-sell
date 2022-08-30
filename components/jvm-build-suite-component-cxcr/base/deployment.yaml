@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: jvm-build-suite-component-cxcr
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: jvm-build-suite-component-cxcr
+    app.kubernetes.io/part-of: jvm-build-suite-application-badk
+  name: jvm-build-suite-component-cxcr
+  namespace: jvm-build-7ba9059d-6048-451a-9a4c-62e8352a7d81
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: jvm-build-suite-component-cxcr
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: jvm-build-suite-component-cxcr
+    spec:
+      containers:
+      - image: quay.io/psturc/test-images:528a12c811d547a693f48c5c4c29b383
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: container-image
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 8081
+        resources: {}
+status: {}

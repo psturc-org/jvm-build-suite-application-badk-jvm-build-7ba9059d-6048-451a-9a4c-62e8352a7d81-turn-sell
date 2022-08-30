@@ -1,0 +1,26 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  annotations:
+    build.appstudio.openshift.io/application: jvm-build-suite-application-badk
+    build.appstudio.openshift.io/build: "true"
+    build.appstudio.openshift.io/component: jvm-build-suite-component-cxcr
+    build.appstudio.openshift.io/type: build
+    build.appstudio.openshift.io/version: "0.1"
+    pipelines.appstudio.openshift.io/type: build
+  creationTimestamp: null
+  name: jvm-build-suite-component-cxcr
+  namespace: jvm-build-7ba9059d-6048-451a-9a4c-62e8352a7d81
+spec:
+  namespaceSelector: {}
+  resources: {}
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - kind: ClusterTriggerBinding
+      ref: github-push
+    template:
+      ref: jvm-build-suite-component-cxcr
+status:
+  configuration:
+    generatedName: ""
